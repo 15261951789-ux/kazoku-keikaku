@@ -11,6 +11,7 @@ LIBNX		:=	$(DEVKITPRO)/libnx
 DEVKITA64	:=	$(DEVKITPRO)/devkitA64
 PORTLIBS	:=	$(DEVKITPRO)/portlibs/switch
 CC			:=	$(DEVKITA64)/bin/aarch64-none-elf-gcc
+CXX			:=	$(DEVKITA64)/bin/aarch64-none-elf-g++
 NROTOOL		:=	elf2nro
 NACPTOOL	:=	nacptool
 ROMFSGEN	:=	build_romfs
@@ -37,7 +38,7 @@ $(ROMFS_BIN): romfs/font.ttf romfs/script.txt
 	$(ROMFSGEN) romfs $@
 
 $(TARGET).elf: $(OBJS)
-	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	$(CXX) $^ $(LDFLAGS) $(LIBS) -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
