@@ -24,7 +24,7 @@ CFLAGS		:=	-g -Wall -O2 -ffunction-sections $(ARCH) -D__SWITCH__ \
 				-I$(LIBNX)/include -I$(PORTLIBS)/include -I$(PORTLIBS)/include/SDL2
 LDFLAGS		:=	-specs=$(LIBNX)/switch.specs -g $(ARCH) \
 				-L$(LIBNX)/lib -L$(PORTLIBS)/lib
-LIBS		:=	-lSDL2_ttf -lharfbuzz -lfreetype -lpng -lz -lSDL2 -lglapi -ldrm_nouveau -lnx -lm
+LIBS		:=	-lSDL2_ttf -lharfbuzz -lfreetype -lpng -lbz2 -lz -lSDL2 -lEGL -lGLESv2 -lglapi -ldrm_nouveau -lnx -lm
 
 SRCS		:=	src/main.c
 OBJS		:=	$(SRCS:.c=.o)
