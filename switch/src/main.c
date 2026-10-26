@@ -149,11 +149,26 @@ int main(int argc, char *argv[]) {
 
     load_script("romfs:/script.txt");
 
+    SDL_Joystick *joy = SDL_JoystickOpen(0);
+
     const char *cur = advance();
     if (cur) render_text(cur);
 
     int running = 1;
+    int skip_tick = 0;
     while (running) {
+        // 长按 B 键快进（约每 50ms 推进一句）
+        if (joy && SDL_JoystickGetButton(joy, 1)) {
+            skip_tick++;
+            if (skip_tick >= 3) {
+                skip_tick = 0;
+                cur = advance();
+                if (cur) render_text(cur);
+                else running = 0;
+            }
+        } else {
+            skip_tick = 0;
+        }
         SDL_Event e;
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) running = 0;
