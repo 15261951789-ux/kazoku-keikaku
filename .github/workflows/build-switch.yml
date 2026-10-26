@@ -14,11 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install SDL2 portlibs
+        run: |
+          dkp-pacman -S --noconfirm --needed \
+            switch-sdl2 switch-sdl2_ttf \
+            switch-freetype switch-libpng switch-zlib switch-brotli
+          ls $DEVKITPRO/portlibs/switch/lib/ | head -20
+
       - name: Build NRO
         run: |
           echo "DEVKITPRO=$DEVKITPRO"
-          which aarch64-none-elf-gcc && aarch64-none-elf-gcc --version | head -1
-          which elf2nro || echo "elf2nro not found"
           make -C switch 2>&1 | tee build.log
           ls -la switch/*.nro switch/*.nacp
 
