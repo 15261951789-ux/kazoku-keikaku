@@ -9,21 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkita64:latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install devkitPro toolchain
-        run: |
-          wget -q https://apt.devkitpro.org/install-devkitpro-pacman -O /tmp/dkp-pacman.sh
-          chmod +x /tmp/dkp-pacman.sh
-          sudo /tmp/dkp-pacman.sh
-          sudo dkp-pacman -Syu --noconfirm
-          sudo dkp-pacman -S --noconfirm switch-dev
-          echo "DEVKITPRO=/opt/devkitpro" >> $GITHUB_ENV
-
       - name: Build NRO
         run: |
-          source /etc/profile.d/devkit-env.sh
+          echo "DEVKITPRO=$DEVKITPRO"
+          which aarch64-none-elf-gcc && aarch64-none-elf-gcc --version | head -1
+          which elf2nro || echo "elf2nro not found"
           make -C switch 2>&1 | tee build.log
           ls -la switch/*.nro switch/*.nacp
 
