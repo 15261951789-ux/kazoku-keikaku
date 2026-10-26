@@ -22,7 +22,7 @@ APP_VERSION	:=	0.1.0
 
 ARCH		:=	-march=armv8-a -mtune=cortex-a57 -mtp=soft -fPIE
 CFLAGS		:=	-g -Wall -O2 -ffunction-sections $(ARCH) -D__SWITCH__ -I$(LIBNX)/include
-LDFLAGS		:=	-specs=$(LIBNX)/switch.specs -g $(ARCH)
+LDFLAGS		:=	-specs=$(LIBNX)/switch.specs -g $(ARCH) -L$(LIBNX)/lib
 
 SRCS		:=	src/main.c
 OBJS		:=	$(SRCS:.c=.o)
