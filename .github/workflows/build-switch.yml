@@ -18,7 +18,7 @@ jobs:
         run: |
           dkp-pacman -S --noconfirm --needed \
             switch-sdl2 switch-sdl2_ttf \
-            switch-freetype switch-libpng switch-zlib
+            switch-freetype switch-libpng switch-zlib switch-harfbuzz
           ls $DEVKITPRO/portlibs/switch/lib/ | head -20
 
       - name: Build NRO
