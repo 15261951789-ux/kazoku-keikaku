@@ -9,8 +9,9 @@ DEVKITPRO	:=	/opt/devkitpro
 endif
 
 LIBNX		:=	$(DEVKITPRO)/libnx
-CC			:=	aarch64-none-elf-gcc
-CXX			:=	aarch64-none-elf-g++
+DEVKITA64	:=	$(DEVKITPRO)/devkitA64
+CC			:=	$(DEVKITA64)/bin/aarch64-none-elf-gcc
+CXX			:=	$(DEVKITA64)/bin/aarch64-none-elf-g++
 NROTOOL		:=	elf2nro
 NACPTOOL	:=	nacptool
 ROMFSGEN	:=	build_romfs
